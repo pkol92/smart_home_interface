@@ -67,38 +67,24 @@ fetch(url)
 listDevices.appendChild(list);
 
 const selectedDevice = (id) => {
-    fetch(`/api/v1/devices/${deviceId}`)
+    fetch(`/api/v1/devices/${id}`)
   .then((response) => {
     return response.json();
   })
   .then((data) => {
     let device = data;
     const divDeviceView = document.getElementById("deviceView");
-    let li = document.createElement('li');
+    const ul = document.createComment('ul');
 
-    let type = document.createElement('h3');
-    let id = document.createElement('h3');
-    let name = document.createElement('h3');
-    let connectionState = document.createElement('h3');
-    let isTurnedOn = document.createElement('h3');
-    let brightness = document.createElement('h3');
-    let color = document.createElement('h3');
-    let powerConsumption = document.createElement('h3');
-    let temperature = document.createElement('h3');
+    for (const key in device) {
+        if (device.hasOwnProperty(key)) {
+            let li = document.createElement('li');
+            li.innerText = `${key}: ${device[key]}`;
+            ul.append(li);
+        }
+    }
 
-    type.innerHTML = `${device.type}`;
-    id.innerHTML = `${device.id}`;
-    name.innerHTML = `${device.name}`;
-    connectionState.innerHTML = `${device.connectionState}`;
-    isTurnedOn.innerHTML = `${device.isTurnedOn}`;
-    brightness.innerHTML = `${device.brightness}`;
-    color.innerHTML = `${device.color}`;
-    powerConsumption.innerHTML = `${device.powerConsumption}`;
-    temperature.innerHTML = `${device.temperature}`;
-
-
-    li.append(type, id, name, connectionState);
-    divDeviceView.appendChild(li);
+    divDeviceView.appendChild(ul);
 
   })
   .catch(function(error) {
