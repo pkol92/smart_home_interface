@@ -4,37 +4,6 @@ listDevices.setAttribute("id", "listDevices")
 const listDeviceDetails = document.createElement("ul");
 divPanel.append(listDevices);
 
-// const createListDevices = (divId, ulId, text) => {
-//     const ul = document.getElementById(`${ulId}`);
-//     const li = document.createElement("li");
-//     const div = document.createElement("div");
-//     div.setAttribute("id", `${divId}`);
-//     const titleDevice = document.createElement("h3");
-//     titleDevice.textContent = `${text}`;
-//     div.append(titleDevice);
-//     li.append(div);
-//     ul.append(li);
-// };
-
-// const createDetailsList = (ulId, divId) => {
-//     const ul = document.createElement("ul");
-//     ul.setAttribute("id", `${ulId}`);
-
-//     const liType = document.createElement("li");
-//     liType.innerText = "Type:";
-//     const liName = document.createElement("li");
-//     liName.innerText = "Name:";
-//     const liConnection = document.createElement("li");
-//     liConnection.innerText = "Connection state:";
-
-//     ul.append(liType, liName, liConnection);
-//     const div = document.getElementById(`${divId}`)
-//     div.append(ul);
-// }
-
-
-// const list = document.createDocumentFragment();
-
 const url = '/api/v1/devices';
 
 fetch(url)
@@ -91,10 +60,3 @@ const selectedDevice = (id) => {
     console.log(error);
 });
 }
-// createListDevices("smartBulb", "listDevices", "Bulb");
-// createListDevices("smartOutlet", "listDevices", "Outlet");
-// createListDevices("smartTemperatureSensor", "listDevices", "Temperature Sensor");
-
-// createDetailsList("bulb", "smartBulb");
-// createDetailsList("outlet", "smartOutlet");
-// createDetailsList("temperatureSensor", "smartTemperatureSensor");
