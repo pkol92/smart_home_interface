@@ -1,3 +1,5 @@
+import SmartDevice from "./devices/smartDevices";
+
 const divPanel = document.getElementById("deviceList");
 const listDevices = document.createElement("ul");
 listDevices.setAttribute("id", "listDevices")
@@ -5,6 +7,8 @@ const listDeviceDetails = document.createElement("ul");
 divPanel.append(listDevices);
 
 const url = '/api/v1/devices';
+
+
 
 fetch(url)
   .then((response) => {
