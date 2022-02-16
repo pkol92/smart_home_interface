@@ -1,4 +1,4 @@
-const SmartDevice = [
+export const SmartDevice = [
     {
         type: 'bulb', // 'bulb', 'outlet' or 'temperatureSensor';
         id: '1',
@@ -17,6 +17,4 @@ const SmartDevice = [
         name: 'temperatureSensor',
         connectionState: 'poorConnection', // 'connected', 'disconnected' or 'poorConnection'
     }
-]
-
-export default SmartDevice;
+];

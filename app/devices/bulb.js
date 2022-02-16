@@ -7,4 +7,4 @@ export const SmartBulb =
   isTurnedOn: true,
   brightness: 50, // <0, 100>
   color: 'red' // in the CSS formats
-}
+};
