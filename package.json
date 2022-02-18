@@ -18,5 +18,8 @@
   "homepage": "https://github.com/pkol92/smart_home_interface",
   "dependencies": {
     "interactjs": "^1.10.11"
+  },
+  "devDependencies": {
+    "@interactjs/types": "^1.10.11"
   }
 }
