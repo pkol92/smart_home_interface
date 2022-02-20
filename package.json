@@ -20,6 +20,8 @@
     "interactjs": "^1.10.11"
   },
   "devDependencies": {
-    "@interactjs/types": "^1.10.11"
+    "@interactjs/types": "^1.10.11",
+    "miragejs": "^0.1.43",
+    "parcel": "^2.3.2"
   }
 }
