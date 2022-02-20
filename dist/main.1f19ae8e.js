@@ -34366,7 +34366,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   }
 });
 var divPanel = document.getElementById("deviceList");
-var listDevices = document.createElement("ul");
+var listDevices = document.createElement("div");
 listDevices.setAttribute("id", "mainList");
 divPanel.append(listDevices);
 
@@ -34392,7 +34392,7 @@ var mainList = function mainList(data, divId) {
     var type = document.createElement('p');
     var name = document.createElement('p');
     var connectionState = document.createElement('p');
-    type.innerHTML = "type: ".concat(device.type, ", ").concat(device.id);
+    type.innerHTML = "type: ".concat(device.type);
     name.innerHTML = "name: ".concat(device.name);
     connectionState.innerHTML = "connection state: ".concat(device.connectionState);
     div.append(type, name, connectionState);
@@ -34402,41 +34402,41 @@ var mainList = function mainList(data, divId) {
 
 var addButton = function addButton(button, id) {
   button.addEventListener("click", function () {
-    console.log(id);
     showDetails(id);
   });
 };
 
 var detaleList = function detaleList(list, divId) {
   var div = document.getElementById("".concat(divId));
+  div.style.padding = "1rem";
 
   if (div.firstChild) {
     div.firstChild.remove();
-    var ul = document.createElement('ul');
+    var divList = document.createElement('div');
 
     for (var key in list) {
       if (list.hasOwnProperty(key)) {
-        var li = document.createElement('li');
-        li.innerText = "".concat(key, ": ").concat(list[key]);
-        ul.append(li);
+        var p = document.createElement('p');
+        p.innerText = "".concat(key, ": ").concat(list[key]);
+        divList.append(p);
       }
     }
 
-    div.appendChild(ul);
+    div.appendChild(divList);
   } else {
-    var _ul = document.createElement('ul');
+    var _divList = document.createElement('div');
 
     for (var _key in list) {
       if (list.hasOwnProperty(_key)) {
-        var _li = document.createElement('li');
+        var _p = document.createElement('p');
 
-        _li.innerText = "".concat(_key, ": ").concat(list[_key]);
+        _p.innerText = "".concat(_key, ": ").concat(list[_key]);
 
-        _ul.append(_li);
+        _divList.append(_p);
       }
     }
 
-    div.appendChild(_ul);
+    div.appendChild(_divList);
   }
 };
 

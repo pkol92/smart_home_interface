@@ -49,7 +49,7 @@ createServer({
 })
 
 const divPanel = document.getElementById("deviceList");
-const listDevices = document.createElement("ul");
+const listDevices = document.createElement("div");
 listDevices.setAttribute("id", "mainList");
 
 divPanel.append(listDevices);
@@ -79,7 +79,7 @@ const mainList = (data, divId) => {
     let name = document.createElement('p');
     let connectionState = document.createElement('p');
 
-    type.innerHTML = `type: ${device.type}, ${device.id}`;
+    type.innerHTML = `type: ${device.type}`;
     name.innerHTML = `name: ${device.name}`;
     connectionState.innerHTML = `connection state: ${device.connectionState}`;
 
@@ -90,36 +90,35 @@ const mainList = (data, divId) => {
 
 const addButton = (button, id) => {
   button.addEventListener("click", ()=> {
-  console.log(id);
   showDetails(id)
 })}
 
 const detaleList = (list, divId) => {
   const div = document.getElementById(`${divId}`);
+  div.style.padding = "1rem";
   if (div.firstChild) {
     div.firstChild.remove();
-    const ul = document.createElement('ul');
+    const divList = document.createElement('div');
     for (const key in list) {
         if (list.hasOwnProperty(key)) {
-            let li = document.createElement('li');
-            li.innerText = `${key}: ${list[key]}`;
-            ul.append(li);
+            let p = document.createElement('p');
+            p.innerText = `${key}: ${list[key]}`;
+            divList.append(p);
         }
     }
-    div.appendChild(ul);
+    div.appendChild(divList);
   } else {
-    const ul = document.createElement('ul');
+    const divList = document.createElement('div');
     for (const key in list) {
         if (list.hasOwnProperty(key)) {
-            let li = document.createElement('li');
-            li.innerText = `${key}: ${list[key]}`;
-            ul.append(li);
+            let p = document.createElement('p');
+            p.innerText = `${key}: ${list[key]}`;
+            divList.append(p);
         }
     }
-    div.appendChild(ul);
+    div.appendChild(divList);
   }
 };
-
 
 const showDetails = (id) => {
   fetch(`/api/v1/devices/${id}`)
