@@ -2,26 +2,37 @@ body {
     background-color: rgb(43, 37, 37);
 }
 
-#panel{
+#panel {
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: auto 1fr;
 }
 
 #deviceList {
-    
+    display: flex;
+    justify-content: flex-start;
 }
 
 #mainList {
     display: flex;
     flex-direction: column;
+    margin-right: 2rem;
 }
 
-#mainList ul {
-    margin: 1rem;
-    background-color: rgb(27, 65, 92);
-    color: white;
+#mainList button {
+    margin: 0.3rem;
     border-radius: 0.75em;
-    padding: 1rem;
+    text-align: left;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+#mainList button:hover {
+    background-color: rgba(255, 72, 0, 0.438);
+    color:white;
+}
+
+#mainList button:focus {
+    border: 3px solid rgba(248, 71, 26, 0.815);
 }
 
 #deviceField {
@@ -34,9 +45,25 @@ body {
     background-color: rgb(27, 65, 92);
     color: white;
     border-radius: 0.75em;
-    padding: 2%;
     touch-action: none;
     user-select: none;  
-    border: 2px solid rgba(255, 72, 0, 0.438);
     box-shadow: 0 0 2em rgba(255, 72, 0, 0.438);
+}
+
+@media only screen and (max-width: 600px) {
+    #panel {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2fr;
+    }
+    #deviceList {
+        justify-content: center;
+    }
+    #mainList button {
+        font-size: 0.6rem;
+        margin: 0.3rem;
+        margin-bottom: 1rem;
+    }
+    .deviceView {
+        font-size: 0.75rem;
+    }
 }
