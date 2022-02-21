@@ -34275,7 +34275,7 @@ var _miragejs = require("miragejs");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//create fake server 
+//create fake server
 (0, _miragejs.createServer)({
   models: {
     device: _miragejs.Model
@@ -34287,32 +34287,32 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   },
   seeds: function seeds(server) {
     server.create("device", {
-      type: 'bulb',
-      id: '1',
-      name: 'bulb',
-      connectionState: 'connected',
+      type: "bulb",
+      id: "1",
+      name: "bulb",
+      connectionState: "connected",
       // 'connected', 'disconnected' or 'poorConnection'
-      isTurnedOn: 'true',
+      isTurnedOn: "true",
       brightness: 50,
       // <0, 100>
-      color: 'red' // in the CSS formats
+      color: "red" // in the CSS formats
 
     });
     server.create("device", {
-      type: 'outlet',
-      id: '2',
-      name: 'outlet',
-      connectionState: 'disconnected',
+      type: "outlet",
+      id: "2",
+      name: "outlet",
+      connectionState: "disconnected",
       // 'connected', 'disconnected' or 'poorConnection'
-      isTurnedOn: 'false',
+      isTurnedOn: "false",
       powerConsumption: 3 // in watts
 
     });
     server.create("device", {
-      type: 'temperatureSensor',
-      id: '3',
-      name: 'temperatureSensor',
-      connectionState: 'poorConnection',
+      type: "temperatureSensor",
+      id: "3",
+      name: "temperatureSensor",
+      connectionState: "poorConnection",
       // 'connected', 'disconnected' or 'poorConnection'
       temperature: 67 // in Celsius
 
@@ -34322,7 +34322,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var divPanel = document.getElementById("deviceList");
 var listDevices = document.createElement("div");
 listDevices.setAttribute("id", "mainList");
-divPanel.append(listDevices);
+divPanel.append(listDevices); //call data from API
 
 var runApi = function runApi() {
   fetch("/api/v1/devices/").then(function (response) {
@@ -34333,32 +34333,34 @@ var runApi = function runApi() {
   });
 };
 
-runApi();
+runApi(); //create main list with specific information
 
 var mainList = function mainList(data, divId) {
   data.map(function (device) {
     var mainDiv = document.getElementById("".concat(divId));
-    var btn = document.createElement('button');
-    btn.setAttribute('class', 'btn');
-    var div = document.createElement('div');
+    var btn = document.createElement("button");
+    btn.setAttribute("class", "btn");
+    var div = document.createElement("div");
     mainDiv.append(btn);
     btn.append(div);
-    var type = document.createElement('p');
-    var name = document.createElement('p');
-    var connectionState = document.createElement('p');
+    var type = document.createElement("p");
+    var name = document.createElement("p");
+    var connectionState = document.createElement("p");
     type.innerHTML = "type: ".concat(device.type);
     name.innerHTML = "name: ".concat(device.name);
     connectionState.innerHTML = "connection state: ".concat(device.connectionState);
     div.append(type, name, connectionState);
     addButton(btn, device.id);
   });
-};
+}; //create button which take id to show details
+
 
 var addButton = function addButton(button, id) {
   button.addEventListener("click", function () {
     showDetails(id);
   });
-};
+}; //show details choosed deivcie
+
 
 var detaleList = function detaleList(list, divId) {
   var div = document.getElementById("".concat(divId));
@@ -34366,11 +34368,11 @@ var detaleList = function detaleList(list, divId) {
 
   if (div.firstChild) {
     div.firstChild.remove();
-    var divList = document.createElement('div');
+    var divList = document.createElement("div");
 
     for (var key in list) {
       if (list.hasOwnProperty(key)) {
-        var p = document.createElement('p');
+        var p = document.createElement("p");
         p.innerText = "".concat(key, ": ").concat(list[key]);
         divList.append(p);
       }
@@ -34378,11 +34380,11 @@ var detaleList = function detaleList(list, divId) {
 
     div.appendChild(divList);
   } else {
-    var _divList = document.createElement('div');
+    var _divList = document.createElement("div");
 
     for (var _key in list) {
       if (list.hasOwnProperty(_key)) {
-        var _p = document.createElement('p');
+        var _p = document.createElement("p");
 
         _p.innerText = "".concat(_key, ": ").concat(list[_key]);
 
@@ -34392,7 +34394,8 @@ var detaleList = function detaleList(list, divId) {
 
     div.appendChild(_divList);
   }
-};
+}; //take data from API about choosed device
+
 
 var showDetails = function showDetails(id) {
   fetch("/api/v1/devices/".concat(id)).then(function (response) {
@@ -34400,18 +34403,17 @@ var showDetails = function showDetails(id) {
     return response.json();
   }).then(function (json) {
     return detaleList(json.device, "deviceView");
-  }, console.log("".concat(id)));
-};
+  });
+}; //create dragging posibility
 
-setInterval(detaleList(), 100); //create dragging posibility
 
 var position = {
   x: 0,
   y: 0
 };
-(0, _interactjs.default)('.deviceView').draggable({
+(0, _interactjs.default)(".deviceView").draggable({
   modifiers: [_interactjs.default.modifiers.restrictRect({
-    restriction: 'parent',
+    restriction: "parent",
     endOnly: true
   })],
   listeners: {
@@ -34450,7 +34452,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56121" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63801" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
