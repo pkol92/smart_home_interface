@@ -1,7 +1,7 @@
 import interact from "interactjs";
-import { server } from "./devices/smartDevices";
-import { createServer, Model } from "miragejs"
+import { createServer, Model } from "miragejs";
 
+//create fake server 
 createServer({
   models: {
     device: Model,
@@ -10,42 +10,45 @@ createServer({
   routes() {
       this.namespace = "api/v1"
   
-      this.get("/devices", (schema, request) => {
-        return schema.devices.all()
-      })
+      this.get("/devices")
 
       this.get("/devices/:id")
   },
 
   seeds(server) {
     server.create("device",
-        {
-            type: 'bulb',
-            id: '1',
-            name: 'bulb',
-            connectionState: 'connected', // 'connected', 'disconnected' or 'poorConnection'
-            isTurnedOn: 'true',
-            brightness: 50, // <0, 100>
-            color: 'red' // in the CSS formats
-        })
+      {
+          type: 'bulb',
+          id: '1',
+          name: 'bulb',
+          connectionState: 'connected', // 'connected', 'disconnected' or 'poorConnection'
+          isTurnedOn: 'true',
+          brightness: 50, // <0, 100>
+          color: 'red' // in the CSS formats
+      }
+    )
+
     server.create("device",
-        {
-            type: 'outlet',
-            id: '2',
-            name: 'outlet',
-            connectionState: 'disconnected', // 'connected', 'disconnected' or 'poorConnection'
-            isTurnedOn: 'false',
-            powerConsumption: 3 // in watts
-        })
+      {
+          type: 'outlet',
+          id: '2',
+          name: 'outlet',
+          connectionState: 'disconnected', // 'connected', 'disconnected' or 'poorConnection'
+          isTurnedOn: 'false',
+          powerConsumption: 3 // in watts
+      }
+    )
+
     server.create("device",
-        {
-            type: 'temperatureSensor',
-            id: '3',
-            name: 'temperatureSensor',
-            connectionState: 'poorConnection', // 'connected', 'disconnected' or 'poorConnection'
-            temperature: 67 // in Celsius
-        })   
-      },
+      {
+          type: 'temperatureSensor',
+          id: '3',
+          name: 'temperatureSensor',
+          connectionState: 'poorConnection', // 'connected', 'disconnected' or 'poorConnection'
+          temperature: 67 // in Celsius
+      }
+    )   
+  },
 })
 
 const divPanel = document.getElementById("deviceList");
@@ -126,9 +129,13 @@ const showDetails = (id) => {
     if (!response.ok) throw Error(response.statusText);
     return response.json();
   })
-  .then(json => detaleList(json.device, "deviceView"));
+  .then(json => detaleList(json.device, "deviceView"),
+  console.log(`${id}`));
 }
 
+setInterval(detaleList(), 100);
+
+//create dragging posibility
 const position = { x: 0, y: 0 }
 
 interact('.deviceView').draggable({
