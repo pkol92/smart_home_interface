@@ -57,6 +57,8 @@ listDevices.setAttribute("id", "mainList");
 
 divPanel.append(listDevices);
 
+
+//call data from API
 const runApi = () => {
   fetch("/api/v1/devices/")
   .then(response => {
@@ -68,6 +70,8 @@ const runApi = () => {
 
 runApi();
 
+
+//create main list with specific information
 const mainList = (data, divId) => {
   data.map((device) => {
     const mainDiv = document.getElementById(`${divId}`);
@@ -91,11 +95,14 @@ const mainList = (data, divId) => {
   })
 };
 
+//create button which take id to show details
 const addButton = (button, id) => {
   button.addEventListener("click", ()=> {
   showDetails(id)
 })}
 
+
+//show details choosed deivcie
 const detaleList = (list, divId) => {
   const div = document.getElementById(`${divId}`);
   div.style.padding = "1rem";
@@ -123,17 +130,15 @@ const detaleList = (list, divId) => {
   }
 };
 
+//take data from API about choosed device
 const showDetails = (id) => {
   fetch(`/api/v1/devices/${id}`)
   .then(response => {
     if (!response.ok) throw Error(response.statusText);
     return response.json();
   })
-  .then(json => detaleList(json.device, "deviceView"),
-  console.log(`${id}`));
+  .then(json => detaleList(json.device, "deviceView"))
 }
-
-setInterval(detaleList(), 100);
 
 //create dragging posibility
 const position = { x: 0, y: 0 }

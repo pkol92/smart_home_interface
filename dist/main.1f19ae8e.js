@@ -34322,7 +34322,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var divPanel = document.getElementById("deviceList");
 var listDevices = document.createElement("div");
 listDevices.setAttribute("id", "mainList");
-divPanel.append(listDevices);
+divPanel.append(listDevices); //call data from API
 
 var runApi = function runApi() {
   fetch("/api/v1/devices/").then(function (response) {
@@ -34333,7 +34333,7 @@ var runApi = function runApi() {
   });
 };
 
-runApi();
+runApi(); //create main list with specific information
 
 var mainList = function mainList(data, divId) {
   data.map(function (device) {
@@ -34352,13 +34352,15 @@ var mainList = function mainList(data, divId) {
     div.append(type, name, connectionState);
     addButton(btn, device.id);
   });
-};
+}; //create button which take id to show details
+
 
 var addButton = function addButton(button, id) {
   button.addEventListener("click", function () {
     showDetails(id);
   });
-};
+}; //show details choosed deivcie
+
 
 var detaleList = function detaleList(list, divId) {
   var div = document.getElementById("".concat(divId));
@@ -34392,7 +34394,8 @@ var detaleList = function detaleList(list, divId) {
 
     div.appendChild(_divList);
   }
-};
+}; //take data from API about choosed device
+
 
 var showDetails = function showDetails(id) {
   fetch("/api/v1/devices/".concat(id)).then(function (response) {
@@ -34400,10 +34403,9 @@ var showDetails = function showDetails(id) {
     return response.json();
   }).then(function (json) {
     return detaleList(json.device, "deviceView");
-  }, console.log("".concat(id)));
-};
+  });
+}; //create dragging posibility
 
-setInterval(detaleList(), 100); //create dragging posibility
 
 var position = {
   x: 0,
@@ -34450,7 +34452,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56121" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63801" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
