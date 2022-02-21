@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel app/index.html"
+    "start": "parcel index.html",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
