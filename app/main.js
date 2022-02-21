@@ -1,55 +1,49 @@
 import interact from "interactjs";
 import { createServer, Model } from "miragejs";
 
-//create fake server 
+//create fake server
 createServer({
   models: {
     device: Model,
   },
 
   routes() {
-      this.namespace = "api/v1"
-  
-      this.get("/devices")
+    this.namespace = "api/v1";
 
-      this.get("/devices/:id")
+    this.get("/devices");
+
+    this.get("/devices/:id");
   },
 
   seeds(server) {
-    server.create("device",
-      {
-          type: 'bulb',
-          id: '1',
-          name: 'bulb',
-          connectionState: 'connected', // 'connected', 'disconnected' or 'poorConnection'
-          isTurnedOn: 'true',
-          brightness: 50, // <0, 100>
-          color: 'red' // in the CSS formats
-      }
-    )
+    server.create("device", {
+      type: "bulb",
+      id: "1",
+      name: "bulb",
+      connectionState: "connected", // 'connected', 'disconnected' or 'poorConnection'
+      isTurnedOn: "true",
+      brightness: 50, // <0, 100>
+      color: "red", // in the CSS formats
+    });
 
-    server.create("device",
-      {
-          type: 'outlet',
-          id: '2',
-          name: 'outlet',
-          connectionState: 'disconnected', // 'connected', 'disconnected' or 'poorConnection'
-          isTurnedOn: 'false',
-          powerConsumption: 3 // in watts
-      }
-    )
+    server.create("device", {
+      type: "outlet",
+      id: "2",
+      name: "outlet",
+      connectionState: "disconnected", // 'connected', 'disconnected' or 'poorConnection'
+      isTurnedOn: "false",
+      powerConsumption: 3, // in watts
+    });
 
-    server.create("device",
-      {
-          type: 'temperatureSensor',
-          id: '3',
-          name: 'temperatureSensor',
-          connectionState: 'poorConnection', // 'connected', 'disconnected' or 'poorConnection'
-          temperature: 67 // in Celsius
-      }
-    )   
+    server.create("device", {
+      type: "temperatureSensor",
+      id: "3",
+      name: "temperatureSensor",
+      connectionState: "poorConnection", // 'connected', 'disconnected' or 'poorConnection'
+      temperature: 67, // in Celsius
+    });
   },
-})
+});
 
 const divPanel = document.getElementById("deviceList");
 const listDevices = document.createElement("div");
@@ -57,34 +51,32 @@ listDevices.setAttribute("id", "mainList");
 
 divPanel.append(listDevices);
 
-
 //call data from API
 const runApi = () => {
   fetch("/api/v1/devices/")
-  .then(response => {
-    if (!response.ok) throw Error(response.statusText);
-    return response.json();
-  })
-  .then(json => mainList(json.devices,"mainList"));
+    .then((response) => {
+      if (!response.ok) throw Error(response.statusText);
+      return response.json();
+    })
+    .then((json) => mainList(json.devices, "mainList"));
 };
 
 runApi();
-
 
 //create main list with specific information
 const mainList = (data, divId) => {
   data.map((device) => {
     const mainDiv = document.getElementById(`${divId}`);
-    const btn = document.createElement('button');
-    btn.setAttribute('class', 'btn');
-    const div = document.createElement('div');
+    const btn = document.createElement("button");
+    btn.setAttribute("class", "btn");
+    const div = document.createElement("div");
 
     mainDiv.append(btn);
     btn.append(div);
 
-    let type = document.createElement('p');
-    let name = document.createElement('p');
-    let connectionState = document.createElement('p');
+    let type = document.createElement("p");
+    let name = document.createElement("p");
+    let connectionState = document.createElement("p");
 
     type.innerHTML = `type: ${device.type}`;
     name.innerHTML = `name: ${device.name}`;
@@ -92,15 +84,15 @@ const mainList = (data, divId) => {
 
     div.append(type, name, connectionState);
     addButton(btn, device.id);
-  })
+  });
 };
 
 //create button which take id to show details
 const addButton = (button, id) => {
-  button.addEventListener("click", ()=> {
-  showDetails(id)
-})}
-
+  button.addEventListener("click", () => {
+    showDetails(id);
+  });
+};
 
 //show details choosed deivcie
 const detaleList = (list, divId) => {
@@ -108,23 +100,23 @@ const detaleList = (list, divId) => {
   div.style.padding = "1rem";
   if (div.firstChild) {
     div.firstChild.remove();
-    const divList = document.createElement('div');
+    const divList = document.createElement("div");
     for (const key in list) {
-        if (list.hasOwnProperty(key)) {
-            let p = document.createElement('p');
-            p.innerText = `${key}: ${list[key]}`;
-            divList.append(p);
-        }
+      if (list.hasOwnProperty(key)) {
+        let p = document.createElement("p");
+        p.innerText = `${key}: ${list[key]}`;
+        divList.append(p);
+      }
     }
     div.appendChild(divList);
   } else {
-    const divList = document.createElement('div');
+    const divList = document.createElement("div");
     for (const key in list) {
-        if (list.hasOwnProperty(key)) {
-            let p = document.createElement('p');
-            p.innerText = `${key}: ${list[key]}`;
-            divList.append(p);
-        }
+      if (list.hasOwnProperty(key)) {
+        let p = document.createElement("p");
+        p.innerText = `${key}: ${list[key]}`;
+        divList.append(p);
+      }
     }
     div.appendChild(divList);
   }
@@ -133,30 +125,29 @@ const detaleList = (list, divId) => {
 //take data from API about choosed device
 const showDetails = (id) => {
   fetch(`/api/v1/devices/${id}`)
-  .then(response => {
-    if (!response.ok) throw Error(response.statusText);
-    return response.json();
-  })
-  .then(json => detaleList(json.device, "deviceView"))
-}
+    .then((response) => {
+      if (!response.ok) throw Error(response.statusText);
+      return response.json();
+    })
+    .then((json) => detaleList(json.device, "deviceView"));
+};
 
 //create dragging posibility
-const position = { x: 0, y: 0 }
+const position = { x: 0, y: 0 };
 
-interact('.deviceView').draggable({
+interact(".deviceView").draggable({
   modifiers: [
     interact.modifiers.restrictRect({
-      restriction: 'parent',
-      endOnly: true
-    })
+      restriction: "parent",
+      endOnly: true,
+    }),
   ],
   listeners: {
-    move (event) {
-      position.x += event.dx
-      position.y += event.dy
+    move(event) {
+      position.x += event.dx;
+      position.y += event.dy;
 
-      event.target.style.transform =
-        `translate(${position.x}px, ${position.y}px)`
+      event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
     },
-  }
-})
+  },
+});
