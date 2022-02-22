@@ -1,5 +1,7 @@
 # smart home interface project
 
+You can see the demo at: https://pkol92.github.io/smart_home_interface/
+
 ### Project launch
 After cloning your current project, be sure to run npm install to install all dependencies.
 You can start the project with the command:
