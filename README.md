@@ -8,7 +8,7 @@ You can start the project with the command:
 
 npm start
 
-Open http: // http://localhost:1234 / to view it in a browser.
+Open http://localhost:1234 / to view it in a browser.
 
 ### Project description
 The project consisted in creating a fragment of the web interface of a smart home system. The system supports three types of smart devices: light bulb, socket electrical and temperature sensor. In the future, it may be expanded with support for subsequent types.
